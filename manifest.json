@@ -20,8 +20,8 @@
             "purpose": "any maskable"
         }
     ],
-    "id": "/index",
-    "start_url": "/index",
+    "id": "./index",
+    "start_url": "./index",
     "display" : "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#23569090"
