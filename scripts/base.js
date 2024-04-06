@@ -4,10 +4,72 @@ window.onload = () => {
     document.querySelector('header').style = "display: flex !important;";
     document.querySelector('footer').style = "display: block !important;";    
     document.querySelector('main').style = "display: block !important;";
+    if (window.screenX === 0 && navigator.maxTouchPoints > 0) {
+        document.getElementById("dropbtn").href = "javascript: void(0)";
+    }
 }
 
 function press_key(x) {
     document.dispatchEvent(new KeyboardEvent('keypress', {'key': x, 'keyCode': x.charCodeAt(0), 'which': x.charCodeAt(0)}));
+}
+
+function show_bars() {
+    var x = document.getElementById("toggle");
+    let bar1 = document.getElementById('bar1')
+    let bar2 = document.getElementById('bar2')
+    let bar3 = document.getElementById('bar3')
+
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+        x.style.height = x.scrollHeight + "px";
+        bar1.style.transition = "0.5s ease-in-out"
+        bar2.style.transition = "0.5s ease-in-out"
+        bar3.style.transition = "0.5s ease-in-out"
+        bar1.style.transform = "rotate(315deg)"
+        bar2.style.transform = "rotate(315deg)"
+        bar3.style.transform = "rotate(225deg)"
+        bar1.style.setProperty('--i', '13')
+        bar2.style.setProperty('--i', '9')
+        bar3.style.setProperty('--i', '5')
+
+    } else {
+
+        x.style.height = 0;
+        bar1.style.transition = "0.5s ease-in-out"
+        bar2.style.transition = "0.5s ease-in-out"
+        bar3.style.transition = "0.5s ease-in-out"
+        bar1.style.transform = "rotate(0deg)"
+        bar2.style.transform = "rotate(0deg)"
+        bar3.style.transform = "rotate(0deg)"
+        bar1.style.setProperty('--i', '0')
+        bar2.style.setProperty('--i', '9')
+        bar3.style.setProperty('--i', '18')
+
+        setTimeout(function(){
+            x.style.display = 'none'; 
+        }, 200, x)
+        
+    }
+}
+
+function hide_bars() {
+    var x = document.getElementById("toggle");
+
+    x.style.height = 0;
+    bar1.style.transition = "0.5s ease-in-out"
+    bar2.style.transition = "0.5s ease-in-out"
+    bar3.style.transition = "0.5s ease-in-out"
+    bar1.style.transform = "rotate(0deg)"
+    bar2.style.transform = "rotate(0deg)"
+    bar3.style.transform = "rotate(0deg)"
+    bar1.style.setProperty('--i', '0')
+    bar2.style.setProperty('--i', '9')
+    bar3.style.setProperty('--i', '18')
+
+    setTimeout(function(){
+        x.style.display = 'none'; 
+    }, 200, x)
+        
 }
 
 // COUNTDOWN TIMER -------------------------------------------------
