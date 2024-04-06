@@ -4,7 +4,7 @@ import { words } from "./words.js"
 let word = words[Math.floor(Math.random() * words.length)]
 word = word.toLocaleLowerCase()
 let guessed_letters = []
-console.log(word)
+// console.log(word)
 const stickman = ['bottom', 'side', 'top', 'diagonal', 'rope', 'head', 'body', 'left_arm', 'right_arm', 'left_leg', 'right_leg']
 function reveal(part) {
     document.getElementById(part).style.opacity = 1
