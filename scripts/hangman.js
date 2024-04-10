@@ -1,8 +1,19 @@
 import { words } from "./words.js"
 
+let previous_words = []
+
+try {
+    previous_words = window.localStorage.getItem('previous_words').split(',')
+} catch(err) {
+    console.log(err)
+    console.log(previous_words)
+}
+
 // GAME SETUP
-let word = words[Math.floor(Math.random() * words.length)]
+let parsed_words = words.filter( ( x ) => !previous_words.includes( x ) );
+let word = parsed_words[Math.floor(Math.random() * parsed_words.length)]
 word = word.toLocaleLowerCase()
+previous_words.push(word)
 let guessed_letters = []
 // console.log(word)
 const stickman = ['bottom', 'side', 'top', 'diagonal', 'rope', 'head', 'body', 'left_arm', 'right_arm', 'left_leg', 'right_leg']
@@ -58,9 +69,11 @@ document.onkeypress = function (e) {
                     document.cookie = `points=${points}; SameSite=Strict; Secure`
                     document.getElementById('score').innerHTML = `Words found: ${points}`
                 }
+                window.localStorage.setItem('previous_words', previous_words)
             } else if (errors == stickman.length) {
                 document.getElementById('msg').innerHTML = `<p>The word was <strong>${word}</strong>. Better luck next time!</p>`
                 document.getElementById('new_game').style.display = "flex"
+                window.localStorage.setItem('previous_words', previous_words)
             }
         }, 10)
     }
