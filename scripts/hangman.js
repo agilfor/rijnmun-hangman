@@ -10,10 +10,19 @@ try {
 }
 
 // GAME SETUP
+// console.log(words.length)
 let parsed_words = words.filter( ( x ) => !previous_words.includes( x ) );
+if (parsed_words.length == 0) {
+    parsed_words = words
+    window.localStorage.setItem("previous_words", "")
+}
+// console.log(parsed_words.length)
+// console.log(parsed_words)
 let word = parsed_words[Math.floor(Math.random() * parsed_words.length)]
-word = word.toLocaleLowerCase()
+// word = word.toLocaleLowerCase()
+// console.log(previous_words)
 previous_words.push(word)
+// console.log(previous_words)
 let guessed_letters = []
 // console.log(word)
 const stickman = ['bottom', 'side', 'top', 'diagonal', 'rope', 'head', 'body', 'left_arm', 'right_arm', 'left_leg', 'right_leg']
@@ -58,6 +67,7 @@ document.onkeypress = function (e) {
         }
         setTimeout(() => {
             if (letters_guessed == word.length) {
+                window.localStorage.setItem("previous_words", previous_words)
                 document.getElementById('msg').innerHTML = `<p>Congratulations! You guessed the word!</p>`
                 document.getElementById('new_game').style.display = "flex"
                 if (document.cookie == '') {
@@ -69,11 +79,10 @@ document.onkeypress = function (e) {
                     document.cookie = `points=${points}; SameSite=Strict; Secure`
                     document.getElementById('score').innerHTML = `Words found: ${points}`
                 }
-                window.localStorage.setItem('previous_words', previous_words)
             } else if (errors == stickman.length) {
+                window.localStorage.setItem("previous_words", previous_words)
                 document.getElementById('msg').innerHTML = `<p>The word was <strong>${word}</strong>. Better luck next time!</p>`
                 document.getElementById('new_game').style.display = "flex"
-                window.localStorage.setItem('previous_words', previous_words)
             }
         }, 10)
     }
