@@ -173,5 +173,5 @@ export let words = [
   'ratification',
   'implementation',
   'culture',
-  'native',
+  'native'
 ]
