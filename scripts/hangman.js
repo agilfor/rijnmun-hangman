@@ -78,6 +78,9 @@ document.onkeypress = function (e) {
                     } else {
                         let points = parseInt(document.cookie.split("=")[1], 10)
                         points++
+                        if (points > 10) {
+                            points = 0
+                        }
                         document.cookie = `points=${points}; SameSite=Strict; Secure`
                         document.getElementById('score').innerHTML = `Words found: ${points}`
                     }
