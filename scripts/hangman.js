@@ -1,6 +1,7 @@
 import { words } from "./words.js"
 
 let previous_words = []
+let game_over = false
 
 try {
     previous_words = window.localStorage.getItem('previous_words').split(',')
@@ -51,39 +52,43 @@ document.onkeypress = function (e) {
     e = e || window.event;
     // alert(String.fromCharCode(e.keyCode))
     let letter = String.fromCharCode(e.keyCode)
-    if (!guessed_letters.includes(letter)) {
-        guessed_letters.push(letter)
-        document.getElementById(`char${letter}`).style.opacity = 0.3
-        if (word.includes(letter)) {
-            for (let x = 0; x < word.length; x++) {
-                if (word[x] == letter) {
-                    document.getElementById(`char${x}`).innerHTML = letter.toUpperCase()
-                    letters_guessed++
+    if (!game_over) {
+        if (!guessed_letters.includes(letter)) {
+            guessed_letters.push(letter)
+            document.getElementById(`char${letter}`).style.opacity = 0.3
+            if (word.includes(letter)) {
+                for (let x = 0; x < word.length; x++) {
+                    if (word[x] == letter) {
+                        document.getElementById(`char${x}`).innerHTML = letter.toUpperCase()
+                        letters_guessed++
+                    }
                 }
+            } else {
+                reveal(stickman[errors])
+                errors++
             }
-        } else {
-            reveal(stickman[errors])
-            errors++
+            setTimeout(() => {
+                if (letters_guessed == word.length) {
+                    window.localStorage.setItem("previous_words", previous_words)
+                    document.getElementById('msg').innerHTML = `<p>Congratulations! You guessed the word!</p>`
+                    document.getElementById('new_game').style.display = "flex"
+                    if (document.cookie == '') {
+                        document.cookie = 'points=1; SameSite=Strict; Secure'
+                        document.getElementById('score').innerHTML = "Words found: 1"
+                    } else {
+                        let points = parseInt(document.cookie.split("=")[1], 10)
+                        points++
+                        document.cookie = `points=${points}; SameSite=Strict; Secure`
+                        document.getElementById('score').innerHTML = `Words found: ${points}`
+                    }
+                    game_over = true
+                } else if (errors == stickman.length) {
+                    game_over = true
+                    window.localStorage.setItem("previous_words", previous_words)
+                    document.getElementById('msg').innerHTML = `<p>The word was <strong>${word}</strong>. Better luck next time!</p>`
+                    document.getElementById('new_game').style.display = "flex"
+                }
+            }, 10)
         }
-        setTimeout(() => {
-            if (letters_guessed == word.length) {
-                window.localStorage.setItem("previous_words", previous_words)
-                document.getElementById('msg').innerHTML = `<p>Congratulations! You guessed the word!</p>`
-                document.getElementById('new_game').style.display = "flex"
-                if (document.cookie == '') {
-                    document.cookie = 'points=1; SameSite=Strict; Secure'
-                    document.getElementById('score').innerHTML = "Words found: 1"
-                } else {
-                    let points = parseInt(document.cookie.split("=")[1], 10)
-                    points++
-                    document.cookie = `points=${points}; SameSite=Strict; Secure`
-                    document.getElementById('score').innerHTML = `Words found: ${points}`
-                }
-            } else if (errors == stickman.length) {
-                window.localStorage.setItem("previous_words", previous_words)
-                document.getElementById('msg').innerHTML = `<p>The word was <strong>${word}</strong>. Better luck next time!</p>`
-                document.getElementById('new_game').style.display = "flex"
-            }
-        }, 10)
     }
-}
+}   
