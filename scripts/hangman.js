@@ -48,11 +48,12 @@ if (document.cookie == '') {
 }
 
 // GAME
+let allowed = "abcdefghijklmnopqrstuvwxyz"
 document.onkeypress = function (e) {
     e = e || window.event;
     // alert(String.fromCharCode(e.keyCode))
     let letter = String.fromCharCode(e.keyCode)
-    if (!game_over) {
+    if (!game_over && allowed.includes(letter)) {
         if (!guessed_letters.includes(letter)) {
             guessed_letters.push(letter)
             document.getElementById(`char${letter}`).style.opacity = 0.3
@@ -80,7 +81,7 @@ document.onkeypress = function (e) {
                         points++
                         if (points > 10) {
                             points = 0
-                        }
+                        } //delete later
                         document.cookie = `points=${points}; SameSite=Strict; Secure`
                         document.getElementById('score').innerHTML = `Words found: ${points}`
                     }
