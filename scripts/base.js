@@ -13,21 +13,6 @@ function press_key(x) {
     document.dispatchEvent(new KeyboardEvent('keypress', {'key': x, 'keyCode': x.charCodeAt(0), 'which': x.charCodeAt(0)}));
 }
 
-// Stop inspect element being opened
-// stop right click
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-// if the inspect element is opened, then redirect 
-if ((window.outerHeight - window.innerHeight) > 150 || (window.outerWidth - window.innerWidth) > 100) {
-    window.location.replace("/");
-}
-
-window.onresize = function () {
-    if ((window.outerHeight - window.innerHeight) > 100 || (window.outerWidth - window.innerWidth) > 20) {
-        window.location.replace("/");
-    }
-}
-
 function show_bars() {
     var x = document.getElementById("toggle");
     let bar1 = document.getElementById('bar1')
