@@ -7,7 +7,7 @@ h1 {
     display: flex;
     justify-content: center;
     #top {
-        opacity: 0;
+        opacity: 0.2;
         position: relative;
         width: 170px;
         height: 5px;
@@ -19,14 +19,14 @@ h1 {
         flex-direction: row;
     }
     #side {
-        opacity: 0;
+        opacity: 0.2;
         position: relative;
         width: 5px;
         height: 200px;
         background-color: #000;
     }
     #bottom {
-        opacity: 0;
+        opacity: 0.2;
         position: relative;
         width: 170px;
         height: 5px;
@@ -42,7 +42,7 @@ h1 {
             flex-direction: row;
             justify-content: space-between;
             #diagonal {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 50px;
                 margin: -10px 0 0 13px;
@@ -51,7 +51,7 @@ h1 {
                 transform: rotate(45deg);
             }
             #rope {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 15px;
                 background-color: #000;
@@ -64,7 +64,7 @@ h1 {
             flex-direction: row;
             justify-content: end;
             #head {
-                opacity: 0;
+                opacity: 0.2;
                 width: 36px;
                 height: 36px;
                 border: 4px solid #000;
@@ -76,7 +76,7 @@ h1 {
             justify-content: end;
             width: 120px;
             #left_arm {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 40px;
                 background-color: #000;
@@ -85,13 +85,13 @@ h1 {
                 margin-right: 6px;
             }
             #body {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 50px;
                 background-color: #000;
             }
             #right_arm {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 40px;
                 background-color: #000;
@@ -105,7 +105,7 @@ h1 {
             display: flex;
             justify-content: end;
             #left_leg {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 45px;
                 background-color: #000;
@@ -114,7 +114,7 @@ h1 {
                 margin-right: 16px;
             }
             #right_leg {
-                opacity: 0;
+                opacity: 0.2;
                 width: 5px;
                 height: 45px;
                 background-color: #000;
